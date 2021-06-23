@@ -1,0 +1,20 @@
+{
+  "name": "ashirchkov/ozon-sdk",
+  "license": "MIT",
+  "description": "Php SDK for OZON api services",
+  "require": {
+    "php": ">=7.0",
+    "ext-json": "*",
+    "psr/http-client": "1.0.1",
+    "nyholm/psr7": "1.4.0",
+    "jms/serializer": "3.12.3"
+  },
+  "require-dev": {
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "AlexeyShirchkov\\Ozon\\": "src/"
+    }
+  }
+}

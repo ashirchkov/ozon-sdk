@@ -1,0 +1,87 @@
+<?php
+
+namespace AlexeyShirchkov\Ozon\Logistics\Http;
+
+use AlexeyShirchkov\Ozon\Common\Enums\MimeTypes;
+use JMS\Serializer\SerializerBuilder;
+use Psr\Http\Message\ResponseInterface;
+
+class Response
+{
+
+    protected $body;
+
+    protected $status;
+
+    protected $errors = [];
+
+    protected $result;
+
+
+    /**
+     * Base constructor.
+     * @param ResponseInterface $response
+     */
+    public function __construct(ResponseInterface $response) {
+
+        $this->status = $response->getStatusCode();
+
+        $this->body = (string) $response->getBody();
+
+        if (
+            !\in_array($this->body, ['', 'null', 'true', 'false'], true) &&
+            0 === \strpos($response->getHeaderLine('Content-type'), MimeTypes::JSON_CONTENT_TYPE)
+        ) {
+            $this->result = SerializerBuilder::create()->build()->deserialize($this->body, 'array', 'json');
+        }
+
+        if(!$this->isSuccess() && isset($this->result['error'])) {
+            $this->errors[] = $this->result['error'];
+        }
+
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int {
+        return $this->status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody() {
+        return $this->body;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors(): array {
+        return $this->errors;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess() {
+        return $this->getStatus() >= 200 && $this->getStatus() <= 299 && empty($this->getErrors());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResult() {
+        return $this->result;
+    }
+
+    /**
+     * @param string $format
+     * @return mixed
+     */
+    public function getFormatResult(string $format) {
+        return SerializerBuilder::create()->build()->deserialize($this->body, $format, 'json');
+    }
+
+}
