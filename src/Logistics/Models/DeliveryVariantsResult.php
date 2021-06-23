@@ -4,31 +4,25 @@ namespace AlexeyShirchkov\Ozon\Logistics\Models;
 
 use JMS\Serializer\Annotation\Type;
 
-class AuthResult
+class DeliveryVariantsResult
 {
 
     /**
-     * @Type("string")
-     * @var string
+     * @Type("array<AlexeyShirchkov\Ozon\Logistics\Models\DeliveryVariant>")
+     * @var DeliveryVariant[]
      */
-    public $access_token;
+    public $data;
 
     /**
      * @Type("int")
      * @var int
      */
-    public $expires_in;
+    public $totalCount;
 
     /**
      * @Type("string")
      * @var string
      */
-    public $token_type;
-
-    /**
-     * @Type("string")
-     * @var string
-     */
-    public $scope;
+    public $nextPageToken;
 
 }

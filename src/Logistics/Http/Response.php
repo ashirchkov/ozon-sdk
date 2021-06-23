@@ -3,6 +3,7 @@
 namespace AlexeyShirchkov\Ozon\Logistics\Http;
 
 use AlexeyShirchkov\Ozon\Common\Enums\MimeTypes;
+use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\SerializerBuilder;
 use Psr\Http\Message\ResponseInterface;
 
@@ -17,6 +18,8 @@ class Response
 
     protected $result;
 
+    protected $serializer;
+
 
     /**
      * Base constructor.
@@ -24,15 +27,20 @@ class Response
      */
     public function __construct(ResponseInterface $response) {
 
-        $this->status = $response->getStatusCode();
+        $this->serializer = SerializerBuilder::create()
+            ->setPropertyNamingStrategy(
+                new IdenticalPropertyNamingStrategy()
+            )
+            ->build();
 
+        $this->status = $response->getStatusCode();
         $this->body = (string) $response->getBody();
 
         if (
             !\in_array($this->body, ['', 'null', 'true', 'false'], true) &&
             0 === \strpos($response->getHeaderLine('Content-type'), MimeTypes::JSON_CONTENT_TYPE)
         ) {
-            $this->result = SerializerBuilder::create()->build()->deserialize($this->body, 'array', 'json');
+            $this->result = $this->serializer->deserialize($this->body, 'array', 'json');
         }
 
         if(!$this->isSuccess() && isset($this->result['error'])) {
@@ -81,7 +89,7 @@ class Response
      * @return mixed
      */
     public function getFormatResult(string $format) {
-        return SerializerBuilder::create()->build()->deserialize($this->body, $format, 'json');
+        return $this->serializer->deserialize($this->body, $format, 'json');
     }
 
 }

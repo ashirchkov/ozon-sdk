@@ -4,31 +4,37 @@ namespace AlexeyShirchkov\Ozon\Logistics\Models;
 
 use JMS\Serializer\Annotation\Type;
 
-class AuthResult
+class DeliveryFromPlace
 {
-
-    /**
-     * @Type("string")
-     * @var string
-     */
-    public $access_token;
 
     /**
      * @Type("int")
      * @var int
      */
-    public $expires_in;
+    public $id;
 
     /**
      * @Type("string")
      * @var string
      */
-    public $token_type;
+    public $name;
 
     /**
      * @Type("string")
      * @var string
      */
-    public $scope;
+    public $city;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
+    public $address;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
+    public $utcOffset;
 
 }
