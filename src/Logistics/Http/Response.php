@@ -7,7 +7,7 @@ use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\SerializerBuilder;
 use Psr\Http\Message\ResponseInterface;
 
-class Response
+abstract class Response
 {
 
     protected $body;
@@ -41,10 +41,6 @@ class Response
             0 === \strpos($response->getHeaderLine('Content-type'), MimeTypes::JSON_CONTENT_TYPE)
         ) {
             $this->result = $this->serializer->deserialize($this->body, 'array', 'json');
-        }
-
-        if(!$this->isSuccess() && isset($this->result['error'])) {
-            $this->errors[] = $this->result['error'];
         }
 
     }

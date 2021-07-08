@@ -3,15 +3,15 @@
 namespace AlexeyShirchkov\Ozon\Logistics\Api;
 
 use AlexeyShirchkov\Ozon\Common\Enums\MimeTypes;
-use AlexeyShirchkov\Ozon\Logistics\Http\Request;
+use AlexeyShirchkov\Ozon\Logistics\Http\AuthRequest;
 
-class Auth extends Request
+class Auth extends AuthRequest
 {
 
     public function authorize(string $clientId, string $clientSecret, string $grantType) {
 
         return $this->setMethod('POST')
-            ->setPath('/principal-auth-api/connect/token')
+            ->setPath(self::API_URL)
             ->setHeader('Content-Type', MimeTypes::FORM_URLENCODED_TYPE)
             ->setBody([
                 'client_id' => $clientId,

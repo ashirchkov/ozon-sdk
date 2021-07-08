@@ -2,22 +2,20 @@
 
 namespace AlexeyShirchkov\Ozon\Logistics\Api;
 
-use AlexeyShirchkov\Ozon\Logistics\Http\Request;
+use AlexeyShirchkov\Ozon\Logistics\Http\ApiRequest;
 
-class Delivery extends Request
+class Delivery extends ApiRequest
 {
-
-    const API_URL = '/principal-integration-api/v1/delivery';
 
     public function cities() {
 
-        return $this->setPath(self::API_URL.'/cities')->send();
+        return $this->setPath(self::API_URL.'/delivery/cities')->send();
 
     }
 
     public function variants(array $params = []) {
 
-        return $this->setPath(self::API_URL.'/variants')
+        return $this->setPath(self::API_URL.'/delivery/variants')
             ->setQuery($params)
             ->send();
 
@@ -25,7 +23,7 @@ class Delivery extends Request
 
     public function byAddress(array $params = []) {
 
-        return $this->setPath(self::API_URL.'/variants/byaddress')
+        return $this->setPath(self::API_URL.'/delivery/variants/byaddress')
             ->setQuery($params)
             ->send();
 
@@ -33,7 +31,7 @@ class Delivery extends Request
 
     public function byAddressShort(array $params = []) {
 
-        return $this->setPath(self::API_URL.'/variants/byaddress/short')
+        return $this->setPath(self::API_URL.'/delivery/variants/byaddress/short')
             ->setQuery($params)
             ->send();
 
@@ -41,13 +39,13 @@ class Delivery extends Request
 
     public function byViewport(array $params = []) {
 
-        return $this->setPath(self::API_URL.'/variants/byviewport')->send();
+        return $this->setPath(self::API_URL.'/delivery/variants/byviewport')->send();
 
     }
 
     public function calculate(array $params = []) {
 
-        return $this->setPath(self::API_URL.'/calculate')
+        return $this->setPath(self::API_URL.'/delivery/calculate')
             ->setQuery($params)
             ->send();
 
@@ -55,7 +53,7 @@ class Delivery extends Request
 
     public function time(array $params = []) {
 
-        return $this->setPath(self::API_URL.'/time')
+        return $this->setPath(self::API_URL.'/delivery/time')
             ->setQuery($params)
             ->send();
 
@@ -63,7 +61,7 @@ class Delivery extends Request
 
     public function fromPlaces() {
 
-        return $this->setPath(self::API_URL.'/from_places')->send();
+        return $this->setPath(self::API_URL.'/delivery/from_places')->send();
 
     }
 
