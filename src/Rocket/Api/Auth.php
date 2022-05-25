@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics\Api;
+namespace AlexeyShirchkov\Ozon\Rocket\Api;
 
 use AlexeyShirchkov\Ozon\Common\Enums\MimeTypes;
-use AlexeyShirchkov\Ozon\Logistics\Http\AuthRequest;
+use AlexeyShirchkov\Ozon\Rocket\Http\AuthRequest;
 
 class Auth extends AuthRequest
 {

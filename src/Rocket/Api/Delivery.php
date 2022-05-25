@@ -1,17 +1,11 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics\Api;
+namespace AlexeyShirchkov\Ozon\Rocket\Api;
 
-use AlexeyShirchkov\Ozon\Logistics\Http\ApiRequest;
+use AlexeyShirchkov\Ozon\Rocket\Http\ApiRequest;
 
 class Delivery extends ApiRequest
 {
-
-    public function cities() {
-
-        return $this->setPath(self::API_URL.'/delivery/cities')->send();
-
-    }
 
     public function variants(array $params = []) {
 

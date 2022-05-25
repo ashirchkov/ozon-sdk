@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics\Models;
+namespace AlexeyShirchkov\Ozon\Rocket\Models;
 
 use JMS\Serializer\Annotation\Type;
 

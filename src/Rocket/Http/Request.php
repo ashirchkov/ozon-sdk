@@ -1,8 +1,8 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics\Http;
+namespace AlexeyShirchkov\Ozon\Rocket\Http;
 
-use AlexeyShirchkov\Ozon\Logistics\Client;
+use AlexeyShirchkov\Ozon\Rocket\Client;
 use Nyholm\Psr7\Factory\Psr17Factory;
 
 abstract class Request

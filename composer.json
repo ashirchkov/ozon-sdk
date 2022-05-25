@@ -10,11 +10,17 @@
     "jms/serializer": "3.12.3"
   },
   "require-dev": {
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "^7.0",
+    "phpunit/phpunit": "*"
   },
   "autoload": {
     "psr-4": {
       "AlexeyShirchkov\\Ozon\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AlexeyShirchkov\\Ozon\\Tests\\": "tests/"
     }
   }
 }

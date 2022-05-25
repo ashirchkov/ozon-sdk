@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics\Models;
+namespace AlexeyShirchkov\Ozon\Rocket\Models;
 
 use JMS\Serializer\Annotation\Type;
 
@@ -8,7 +8,7 @@ class DeliveryVariantsResult
 {
 
     /**
-     * @Type("array<AlexeyShirchkov\Ozon\Logistics\Models\DeliveryVariant>")
+     * @Type("array<AlexeyShirchkov\Ozon\Rocket\Models\DeliveryVariant>")
      * @var DeliveryVariant[]
      */
     public $data;

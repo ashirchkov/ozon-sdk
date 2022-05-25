@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AlexeyShirchkov\Ozon\Logistics\Http;
+namespace AlexeyShirchkov\Ozon\Rocket\Http;
 
 
 class ApiRequest extends Request

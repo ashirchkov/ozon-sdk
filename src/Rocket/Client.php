@@ -1,15 +1,15 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics;
+namespace AlexeyShirchkov\Ozon\Rocket;
 
-use AlexeyShirchkov\Ozon\Logistics\Api\Auth;
-use AlexeyShirchkov\Ozon\Logistics\Api\Delivery;
+use AlexeyShirchkov\Ozon\Rocket\Api\Auth;
+use AlexeyShirchkov\Ozon\Rocket\Api\Delivery;
 use Psr\Http\Client\ClientInterface;
 
 class Client
 {
 
-    private $host = 'https://api.ozon.ru';
+    private $host = 'https://xapi.ozon.ru';
     private $testHost = 'https://api-stg.ozonru.me';
 
     private $testMode = false;

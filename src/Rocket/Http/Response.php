@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Logistics\Http;
+namespace AlexeyShirchkov\Ozon\Rocket\Http;
 
 use AlexeyShirchkov\Ozon\Common\Enums\MimeTypes;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
@@ -13,6 +13,8 @@ abstract class Response
     protected $body;
 
     protected $status;
+
+    protected $headers;
 
     protected $errors = [];
 
@@ -34,14 +36,17 @@ abstract class Response
             ->build();
 
         $this->status = $response->getStatusCode();
-        $this->body = (string) $response->getBody();
+        $this->headers = $response->getHeaders();
+        $this->body = $result = (string) $response->getBody();
 
         if (
-            !\in_array($this->body, ['', 'null', 'true', 'false'], true) &&
+            !\in_array($result, ['', 'null', 'true', 'false'], true) &&
             0 === \strpos($response->getHeaderLine('Content-type'), MimeTypes::JSON_CONTENT_TYPE)
         ) {
-            $this->result = $this->serializer->deserialize($this->body, 'array', 'json');
+            $result = $this->serializer->deserialize($result, 'array', 'json');
         }
+
+        $this->result = $result;
 
     }
 
@@ -50,6 +55,13 @@ abstract class Response
      */
     public function getStatus(): int {
         return $this->status;
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function getHeaders(): array {
+        return $this->headers;
     }
 
     /**
@@ -67,25 +79,18 @@ abstract class Response
     }
 
     /**
+     * @param string $format
+     * @return mixed
+     */
+    public function getResult(string $format = '') {
+        return empty($format) ? $this->result : $this->serializer->deserialize($this->body, $format, 'json');
+    }
+
+    /**
      * @return bool
      */
     public function isSuccess() {
         return $this->getStatus() >= 200 && $this->getStatus() <= 299 && empty($this->getErrors());
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getResult() {
-        return $this->result;
-    }
-
-    /**
-     * @param string $format
-     * @return mixed
-     */
-    public function getFormatResult(string $format) {
-        return $this->serializer->deserialize($this->body, $format, 'json');
     }
 
 }
