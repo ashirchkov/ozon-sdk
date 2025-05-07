@@ -4,9 +4,7 @@ Ozon SDK
 
 ## Документация Ozon Api
 
-Ozon Seller - <https://docs.ozon.ru/api/seller> 
-
-Ozon Rocket - <https://docs.ozon.ru/api/rocket> 
+Ozon Seller - <https://docs.ozon.ru/api/seller>
 
 ## Install
 

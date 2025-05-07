@@ -3,11 +3,12 @@
   "license": "MIT",
   "description": "Php SDK for OZON api services",
   "require": {
-    "php": ">=7.0",
+    "php": ">=8.2",
     "ext-json": "*",
     "psr/http-client": "1.0.1",
     "nyholm/psr7": "1.4.0",
-    "jms/serializer": "^3.0"
+    "symfony/serializer": "^7.2",
+    "symfony/serializer-pack": "^1.3"
   },
   "require-dev": {
     "guzzlehttp/guzzle": "^7.0",

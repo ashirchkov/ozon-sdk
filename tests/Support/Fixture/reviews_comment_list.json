@@ -1,0 +1,13 @@
+{
+  "comments": [
+    {
+      "id": "string",
+      "is_official": true,
+      "is_owner": true,
+      "parent_comment_id": "string",
+      "published_at": "2019-08-24T14:15:22Z",
+      "text": "string"
+    }
+  ],
+  "offset": 0
+}

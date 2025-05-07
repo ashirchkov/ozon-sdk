@@ -1,0 +1,9 @@
+<?php
+
+namespace AlexeyShirchkov\Ozon\Seller\V1\Enum;
+
+enum ReviewStatus: string
+{
+    case Processed = 'PROCESSED';
+    case Unprocessed = 'UNPROCESSED';
+}

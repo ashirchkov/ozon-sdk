@@ -1,0 +1,19 @@
+{
+  "has_next": true,
+  "last_id": "string",
+  "reviews": [
+    {
+      "comments_amount": 0,
+      "id": "string",
+      "is_rating_participant": true,
+      "order_status": "string",
+      "photos_amount": 0,
+      "published_at": "2019-08-24T14:15:22Z",
+      "rating": 0,
+      "sku": 0,
+      "status": "string",
+      "text": "string",
+      "videos_amount": 0
+    }
+  ]
+}
