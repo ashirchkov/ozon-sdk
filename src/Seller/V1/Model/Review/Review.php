@@ -1,10 +1,12 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews;
+declare(strict_types=1);
 
-use AlexeyShirchkov\Ozon\Common\Model\ModelInterface;
+namespace AlexeyShirchkov\Ozon\Seller\V1\Model\Review;
 
-readonly class Review implements ModelInterface
+use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
+
+readonly class Review extends AbstractModel
 {
 
     /**
@@ -27,19 +29,19 @@ readonly class Review implements ModelInterface
     public function __construct(
         public string $id,
         public string $published_at,
-        public int    $rating,
-        public int    $sku,
+        public int $rating,
+        public int $sku,
         public string $status,
         public string $order_status,
         public string $text,
-        public bool   $is_rating_participant,
-        public int    $comments_amount,
-        public int    $photos_amount,
-        public int    $videos_amount,
+        public bool $is_rating_participant,
+        public int $comments_amount,
+        public int $photos_amount,
+        public int $videos_amount,
         public ?array $photos = null,
         public ?array $videos = null,
-        public ?int   $likes_amount = null,
-        public ?int   $dislikes_amount = null,
+        public ?int $likes_amount = null,
+        public ?int $dislikes_amount = null,
     ) {}
 
 }

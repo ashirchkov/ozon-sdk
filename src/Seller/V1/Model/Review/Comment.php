@@ -1,10 +1,12 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews;
+declare(strict_types=1);
 
-use AlexeyShirchkov\Ozon\Common\Model\ModelInterface;
+namespace AlexeyShirchkov\Ozon\Seller\V1\Model\Review;
 
-readonly class Comment implements ModelInterface
+use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
+
+readonly class Comment extends AbstractModel
 {
 
     /**
@@ -17,8 +19,8 @@ readonly class Comment implements ModelInterface
      */
     public function __construct(
         public string $id,
-        public bool   $is_official,
-        public bool   $is_owner,
+        public bool $is_official,
+        public bool $is_owner,
         public string $parent_comment_id,
         public string $published_at,
         public string $text,

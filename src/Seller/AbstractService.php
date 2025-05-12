@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace AlexeyShirchkov\Ozon\Seller;
 
-use AlexeyShirchkov\Ozon\Common\Enum\HttpMethod;
-use AlexeyShirchkov\Ozon\Common\Enum\MimeType;
-use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
-use AlexeyShirchkov\Ozon\Common\Http\Request;
-use AlexeyShirchkov\Ozon\Common\Http\Response;
-use AlexeyShirchkov\Ozon\Common\Model\ApiError;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
+use AlexeyShirchkov\Ozon\Common\Http\Request;
+use Psr\Http\Client\ClientExceptionInterface;
+use AlexeyShirchkov\Ozon\Common\Enum\MimeType;
+use AlexeyShirchkov\Ozon\Common\Http\Response;
+use AlexeyShirchkov\Ozon\Common\Model\ApiError;
+use AlexeyShirchkov\Ozon\Common\Enum\HttpMethod;
 use Symfony\Component\Serializer\SerializerInterface;
+use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
+use AlexeyShirchkov\Ozon\Common\Contract\ApiRequestInterface;
 
 class AbstractService
 {
@@ -21,21 +22,21 @@ class AbstractService
     /**
      * @param ClientInterface $client
      * @param ClientConfiguration $configuration
-     * @param SerializerInterface|null $serializer
+     * @param SerializerInterface $serializer
      */
     public function __construct(
-        protected readonly ClientInterface      $client,
-        protected readonly ClientConfiguration  $configuration,
-        protected readonly ?SerializerInterface $serializer = null
+        protected readonly ClientInterface $client,
+        protected readonly ClientConfiguration $configuration,
+        protected readonly SerializerInterface $serializer
     ) {}
 
     /**
      * @param HttpMethod $method
      * @param string $uri
-     * @param array|null $data
+     * @param ApiRequestInterface|null $data
      * @return RequestInterface
      */
-    protected function makeRequest(HttpMethod $method, string $uri, ?array $data = null): RequestInterface {
+    protected function makeRequest(HttpMethod $method, string $uri, ?ApiRequestInterface $data = null): RequestInterface {
 
         $requestBuilder = (new Request($method->value, $this->configuration->host . $uri))
             ->setHeader('Content-Type', MimeType::ApplicationJson->value);
@@ -49,8 +50,8 @@ class AbstractService
 
         if (!is_null($data)) {
             match ($method) {
-                HttpMethod::Post, HttpMethod::Put, HttpMethod::Patch, HttpMethod::Delete => $requestBuilder->setBody($data),
-                default => $requestBuilder->setQuery($data)
+                HttpMethod::Post, HttpMethod::Put, HttpMethod::Patch, HttpMethod::Delete => $requestBuilder->setBody(json_encode($data)),
+                default => $requestBuilder->setQuery(http_build_query($data))
             };
         }
 
@@ -61,7 +62,7 @@ class AbstractService
     /**
      * @throws OzonApiException
      */
-    protected function sendRequest(HttpMethod $method, string $uri, array $data = []): Response {
+    protected function sendRequest(HttpMethod $method, string $uri, ?ApiRequestInterface $data = null): Response {
 
         try {
 

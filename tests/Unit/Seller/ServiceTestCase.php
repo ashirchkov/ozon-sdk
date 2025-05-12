@@ -2,8 +2,8 @@
 
 namespace AlexeyShirchkov\Ozon\Tests\Unit\Seller;
 
-use AlexeyShirchkov\Ozon\Seller\ClientConfiguration;
 use AlexeyShirchkov\Ozon\Tests\TestCase;
+use AlexeyShirchkov\Ozon\Seller\ClientConfiguration;
 
 abstract class ServiceTestCase extends TestCase
 {

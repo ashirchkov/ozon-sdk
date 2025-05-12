@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AlexeyShirchkov\Ozon\Common\Http;
 
+use Psr\Http\Message\UriInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriInterface;
 
 class Request
 {
@@ -71,21 +71,21 @@ class Request
 
 
     /**
-     * @param array $query
+     * @param string $query
      * @return Request
      */
-    public function setQuery(array $query = []): Request {
-        $this->uri = $this->uri->withQuery(http_build_query($query));
+    public function setQuery(string $query): Request {
+        $this->uri = $this->uri->withQuery($query);
         $this->request = $this->request->withUri($this->uri);
         return $this;
     }
 
     /**
-     * @param array $params
+     * @param string $body
      * @return Request
      */
-    public function setBody(array $params): Request {
-        $stream = (new Psr17Factory())->createStream(json_encode($params));
+    public function setBody(string $body): Request {
+        $stream = (new Psr17Factory())->createStream($body);
         $this->request = $this->request->withBody($stream);
         return $this;
     }

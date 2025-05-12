@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AlexeyShirchkov\Ozon\Common\Http;
 
-use AlexeyShirchkov\Ozon\Common\Enum\MimeType;
-use AlexeyShirchkov\Ozon\Common\Model\ModelInterface;
+use Throwable;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
+use AlexeyShirchkov\Ozon\Common\Enum\MimeType;
 use Symfony\Component\Serializer\SerializerInterface;
-use Throwable;
+use AlexeyShirchkov\Ozon\Common\Contract\ApiResponseInterface;
 
 /**
  * @template T
@@ -108,7 +108,7 @@ class Response
      * @return array
      */
     public function toArray(): array {
-        
+
         $result = json_decode($this->getBody(), true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -125,8 +125,12 @@ class Response
      */
     public function toModel(string $modelClass) {
 
-        if (!is_subclass_of($modelClass, ModelInterface::class)) {
-            throw new LogicException(sprintf('Class %s is not a valid model class.', $modelClass));
+        if (!is_subclass_of($modelClass, ApiResponseInterface::class)) {
+            throw new LogicException(sprintf(
+                'The class "%s" must implement the "%s" interface to be used as a model.',
+                $modelClass,
+                ApiResponseInterface::class
+            ));
         }
 
         try {

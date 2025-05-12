@@ -5,51 +5,47 @@ declare(strict_types=1);
 namespace AlexeyShirchkov\Ozon\Seller\V1\Service;
 
 use AlexeyShirchkov\Ozon\Common\Enum\HttpMethod;
-use AlexeyShirchkov\Ozon\Common\Enum\SortDirection;
-use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
 use AlexeyShirchkov\Ozon\Seller\AbstractService;
-use AlexeyShirchkov\Ozon\Seller\V1\Enum\ReviewStatus;
-use AlexeyShirchkov\Ozon\Seller\V1\Enum\ReviewStatusFilter;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\CommentCreate;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\CommentList;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\Review;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\ReviewCount;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\ReviewList;
+use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\InfoRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\ListRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\InfoResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\ListResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentListRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentListResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\ReviewCountResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\ChangeStatusRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentCreateRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentDeleteRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentCreateResponse;
 
 class ReviewsService extends AbstractService
 {
 
     /**
      * Оставить комментарий на отзыв
-     * @param string $reviewId Идентификатор отзыва
-     * @param string $text Текст комментария
-     * @param bool|null $markReviewAsProcessed Обновление статуса у отзыва: true — статус изменится на Processed, false — статус не изменится
-     * @param string|null $parentCommentId Идентификатор родительского комментария, на который вы отвечаете
-     * @return CommentCreate
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_CommentCreate
+     * @param CommentCreateRequest $request
+     * @return CommentCreateResponse
      * @throws OzonApiException
      */
-    public function commentCreate(string $reviewId, string $text, ?bool $markReviewAsProcessed = null, ?string $parentCommentId = null): CommentCreate {
+    public function commentCreate(CommentCreateRequest $request): CommentCreateResponse {
 
-        $data = array_merge(
-            ['review_id' => $reviewId, 'text' => $text],
-            $markReviewAsProcessed ? ['mark_review_as_processed' => $markReviewAsProcessed] : [],
-            $parentCommentId ? ['parent_comment_id' => $parentCommentId] : []
-        );
-
-        return $this->sendRequest(HttpMethod::Post, '/v1/review/comment/create', $data)
-            ->toModel(CommentCreate::class);
+        return $this->sendRequest(HttpMethod::Post, '/v1/review/comment/create', $request)
+            ->toModel(CommentCreateResponse::class);
 
     }
 
     /**
      * Удалить комментарий на отзыв
-     * @param string $commentId Идентификатор комментария
-     * @return true
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_CommentDelete
+     * @param CommentDeleteRequest $request
+     * @return bool
      * @throws OzonApiException
      */
-    public function commentDelete(string $commentId): true {
+    public function commentDelete(CommentDeleteRequest $request): bool {
 
-        $this->sendRequest(HttpMethod::Post, '/v1/review/comment/delete', ['comment_id' => $commentId]);
+        $this->sendRequest(HttpMethod::Post, '/v1/review/comment/delete', $request);
 
         return true;
 
@@ -57,42 +53,28 @@ class ReviewsService extends AbstractService
 
     /**
      * Список комментариев на отзыв
-     * @param string $reviewId Идентификатор отзыва
-     * @param int $limit Ограничение значений в ответе. Минимум — 20. Максимум — 100
-     * @param int $offset Количество элементов, которое будет пропущено с начала списка в ответе. Например, если offset = 10, то ответ начнётся с 11-го найденного элемента
-     * @param SortDirection $sortDir Направление сортировки: ASC — по возрастанию, DESC — по убыванию
-     * @return CommentList
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_CommentList
+     * @param CommentListRequest $request
+     * @return CommentListResponse
      * @throws OzonApiException
      */
-    public function commentList(string $reviewId, int $limit = 20, int $offset = 0, SortDirection $sortDir = SortDirection::Asc): CommentList {
+    public function commentList(CommentListRequest $request): CommentListResponse {
 
-        $data = [
-            'review_id' => $reviewId,
-            'limit' => $limit,
-            'offset' => $offset,
-            'sort_dir' => strtoupper($sortDir->value),
-        ];
-
-        return $this->sendRequest(HttpMethod::Post, '/v1/review/comment/list', $data)
-            ->toModel(CommentList::class);
+        return $this->sendRequest(HttpMethod::Post, '/v1/review/comment/list', $request)
+            ->toModel(CommentListResponse::class);
 
     }
 
     /**
      * Изменить статус отзывов
-     * @param string[] $reviewIds Массив с идентификаторами отзывов от 1 до 100.
-     * @param ReviewStatus $status Статус отзыва: PROCESSED — обработанный, UNPROCESSED — необработанный
-     * @return true
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_ReviewChangeStatus
+     * @param ChangeStatusRequest $request
+     * @return bool
      * @throws OzonApiException
      */
-    public function changeStatus(array $reviewIds, ReviewStatus $status): true {
+    public function changeStatus(ChangeStatusRequest $request): bool {
 
-        $data = [
-            'review_ids' => $reviewIds,
-            'status' => $status->value
-        ];
-
-        $this->sendRequest(HttpMethod::Post, '/v1/review/change-status', $data);
+        $this->sendRequest(HttpMethod::Post, '/v1/review/change-status', $request);
 
         return true;
 
@@ -100,47 +82,38 @@ class ReviewsService extends AbstractService
 
     /**
      * Количество отзывов по статусам
-     * @return ReviewCount
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_ReviewCount
+     * @return ReviewCountResponse
      * @throws OzonApiException
      */
-    public function count(): ReviewCount {
+    public function count(): ReviewCountResponse {
         return $this->sendRequest(HttpMethod::Post, '/v1/review/count')
-            ->toModel(ReviewCount::class);
+            ->toModel(ReviewCountResponse::class);
     }
 
     /**
      * Получить информацию об отзыве
-     * @param string $reviewId Идентификатор отзыва
-     * @return Review
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_ReviewInfo
+     * @param InfoRequest $request
+     * @return InfoResponse
      * @throws OzonApiException
      */
-    public function info(string $reviewId): Review {
-        return $this->sendRequest(HttpMethod::Post, '/v1/review/info', ['review_id' => $reviewId])
-            ->toModel(Review::class);
+    public function info(InfoRequest $request): InfoResponse {
+        return $this->sendRequest(HttpMethod::Post, '/v1/review/info', $request)
+            ->toModel(InfoResponse::class);
     }
 
     /**
      * Получить список отзывов
-     * @param int $limit Количество отзывов в ответе. Минимум — 20, максимум — 100
-     * @param string|null $lastId Идентификатор последнего отзыва на странице
-     * @param ReviewStatusFilter $status Статусы отзывов: ALL — все, UNPROCESSED — необработанные, PROCESSED — обработанные
-     * @param SortDirection $sortDir Направление сортировки: ASC — по возрастанию, DESC — по убыванию
-     * @return ReviewList
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ReviewAPI_ReviewList
+     * @param ListRequest $request
+     * @return ListResponse
      * @throws OzonApiException
      */
-    public function list(int $limit = 20, ?string $lastId = null, ReviewStatusFilter $status = ReviewStatusFilter::All, SortDirection $sortDir = SortDirection::Asc): ReviewList {
+    public function list(ListRequest $request): ListResponse {
 
-        $data = array_merge(
-            [
-                'limit' => $limit,
-                'status' => $status->value,
-                'sort_dir' => strtoupper($sortDir->value)
-            ],
-            $lastId ? ['last_id' => $lastId] : []
-        );
-
-        return $this->sendRequest(HttpMethod::Post, '/v1/review/list', $data)
-            ->toModel(ReviewList::class);
+        return $this->sendRequest(HttpMethod::Post, '/v1/review/list', $request)
+            ->toModel(ListResponse::class);
 
     }
 

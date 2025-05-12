@@ -2,13 +2,13 @@
 
 namespace AlexeyShirchkov\Ozon\Tests\Unit\Common;
 
-use AlexeyShirchkov\Ozon\Common\Http\Response;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\CommentCreate;
-use AlexeyShirchkov\Ozon\Seller\V1\Models\Reviews\ReviewCount;
-use AlexeyShirchkov\Ozon\Tests\Support\Factory\MockResponseFactory;
-use AlexeyShirchkov\Ozon\Tests\TestCase;
-use LogicException;
 use stdClass;
+use LogicException;
+use AlexeyShirchkov\Ozon\Tests\TestCase;
+use AlexeyShirchkov\Ozon\Common\Http\Response;
+use AlexeyShirchkov\Ozon\Tests\Support\Factory\MockResponseFactory;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\ReviewCountResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentCreateResponse;
 
 class ResponseTest extends TestCase
 {
@@ -50,14 +50,14 @@ class ResponseTest extends TestCase
             $this->serializer
         );
 
-        $commentCreate = $response->toModel(CommentCreate::class);
+        $commentCreate = $response->toModel(CommentCreateResponse::class);
 
-        $this->assertInstanceOf(CommentCreate::class, $commentCreate);
+        $this->assertInstanceOf(CommentCreateResponse::class, $commentCreate);
         $this->assertEquals('12345', $commentCreate->comment_id);
 
         $this->expectException(LogicException::class);
         $this->expectExceptionMessageMatches('/cannot create an instance/i');
-        $response->toModel(ReviewCount::class);
+        $response->toModel(ReviewCountResponse::class);
 
     }
 
@@ -71,7 +71,7 @@ class ResponseTest extends TestCase
         );
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessageMatches('/not a valid model/i');
+        $this->expectExceptionMessageMatches('/must implement the/i');
         $response->toModel(stdClass::class);
 
     }
@@ -85,7 +85,7 @@ class ResponseTest extends TestCase
 
         $this->expectException(LogicException::class);
         $this->expectExceptionMessageMatches('/syntax error/i');
-        $response->toModel(CommentCreate::class);
+        $response->toModel(CommentCreateResponse::class);
 
     }
 
