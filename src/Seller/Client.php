@@ -8,6 +8,7 @@ namespace AlexeyShirchkov\Ozon\Seller;
 use Psr\Http\Client\ClientInterface;
 use AlexeyShirchkov\Ozon\Seller\V1\ClientV1;
 use AlexeyShirchkov\Ozon\Seller\V3\ClientV3;
+use AlexeyShirchkov\Ozon\Seller\V4\ClientV4;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class Client
@@ -43,6 +44,15 @@ final class Client
      */
     public function v3(): ClientV3 {
         return $this->instances[ClientV3::class] ??= new ClientV3(
+            $this->httpClient, $this->configuration, $this->serializer
+        );
+    }
+
+    /**
+     * @return ClientV4
+     */
+    public function v4(): ClientV4 {
+        return $this->instances[ClientV4::class] ??= new ClientV4(
             $this->httpClient, $this->configuration, $this->serializer
         );
     }

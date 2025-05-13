@@ -10,5 +10,10 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiResponseInterface;
 
 readonly class InfoListResponse extends AbstractModel implements ApiResponseInterface
 {
-
+    /**
+     * @param InfoListItem[] $items
+     */
+    public function __construct(
+        public array $items
+    ) {}
 }

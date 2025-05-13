@@ -10,11 +10,11 @@ use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 readonly class ImportInfoResult extends AbstractModel
 {
     /**
-     * @param ImportItem[] $items
-     * @param int $total
+     * @param ImportInfoItem[]|null $items
+     * @param int|null $total
      */
     public function __construct(
-        public array $items,
-        public int $total
+        public ?array $items = null,
+        public ?int $total = null
     ) {}
 }

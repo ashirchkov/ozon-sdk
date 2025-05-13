@@ -10,7 +10,7 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiRequestInterface;
 readonly class ImportRequest extends AbstractModel implements ApiRequestInterface
 {
     /**
-     * @param Product[] $items
+     * @param ImportProduct[] $items
      */
     public function __construct(
         public array $items

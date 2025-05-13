@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AlexeyShirchkov\Ozon\Tests\Unit\Seller\V1\Service;
 
 use GuzzleHttp\Client;
@@ -17,7 +19,7 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\ChangeStatusRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentCreateRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentDeleteRequest;
 
-class ReviewsServiceTest extends ServiceTestCase
+class ReviewServiceTest extends ServiceTestCase
 {
 
     /**
@@ -29,7 +31,7 @@ class ReviewsServiceTest extends ServiceTestCase
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_comment_create')
+                $this->fixtureLoader->load('reviews_comment_create_v1')
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')
@@ -81,7 +83,7 @@ class ReviewsServiceTest extends ServiceTestCase
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_comment_list')
+                $this->fixtureLoader->load('reviews_comment_list_v1')
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')
@@ -133,7 +135,7 @@ class ReviewsServiceTest extends ServiceTestCase
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_count')
+                $this->fixtureLoader->load('reviews_count_v1')
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')
@@ -161,7 +163,7 @@ class ReviewsServiceTest extends ServiceTestCase
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_info')
+                $this->fixtureLoader->load('reviews_info_v1')
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')
@@ -189,7 +191,7 @@ class ReviewsServiceTest extends ServiceTestCase
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_list')
+                $this->fixtureLoader->load('reviews_list_v1')
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')

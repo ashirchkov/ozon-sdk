@@ -9,12 +9,10 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiResponseInterface;
 
 readonly class ImportResponse extends AbstractModel implements ApiResponseInterface
 {
-
     /**
-     * @param object{'task_id': int} $result
+     * @param ImportResult $result
      */
     public function __construct(
-        public object $result
+        public ImportResult $result
     ) {}
-
 }

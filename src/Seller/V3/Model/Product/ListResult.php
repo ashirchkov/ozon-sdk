@@ -10,13 +10,13 @@ use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 readonly class ListResult extends AbstractModel
 {
     /**
-     * @param ListItem[] $items
-     * @param string $last_id
-     * @param int $total
+     * @param ListItem[]|null $items
+     * @param string|null $last_id
+     * @param int|null $total
      */
     public function __construct(
-        public array $items,
-        public string $last_id,
-        public int $total,
+        public ?array $items = null,
+        public ?string $last_id = null,
+        public ?int $total = null,
     ) {}
 }

@@ -45,7 +45,7 @@ class ResponseTest extends TestCase
 
         $response = new Response(
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_comment_create')
+                $this->fixtureLoader->load('reviews_comment_create_v1')
             ),
             $this->serializer
         );
@@ -65,7 +65,7 @@ class ResponseTest extends TestCase
 
         $response = new Response(
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_comment_create')
+                $this->fixtureLoader->load('reviews_comment_create_v1')
             ),
             $this->serializer
         );
@@ -93,7 +93,7 @@ class ResponseTest extends TestCase
 
         $response = new Response(
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('reviews_comment_create')
+                $this->fixtureLoader->load('reviews_comment_create_v1')
             ),
             $this->serializer
         );

@@ -7,12 +7,12 @@ namespace AlexeyShirchkov\Ozon\Common\Model;
 readonly class ApiErrorDetail extends AbstractModel
 {
     /**
-     * @param string $typeUrl Тип протокола передачи данных
-     * @param string $value Значение ошибки
+     * @param string|null $typeUrl Тип протокола передачи данных
+     * @param string|null $value Значение ошибки
      */
     public function __construct(
-        public string $typeUrl,
-        public string $value
+        public ?string $typeUrl = null,
+        public ?string $value = null
     ) {}
 
 }

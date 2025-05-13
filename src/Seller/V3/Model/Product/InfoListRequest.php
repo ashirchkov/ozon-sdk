@@ -10,5 +10,14 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiRequestInterface;
 
 readonly class InfoListRequest extends AbstractModel implements ApiRequestInterface
 {
-
+    /**
+     * @param array|null $offer_id
+     * @param array|null $product_id
+     * @param array|null $sku
+     */
+    public function __construct(
+        public ?array $offer_id = null,
+        public ?array $product_id = null,
+        public ?array $sku = null,
+    ) {}
 }

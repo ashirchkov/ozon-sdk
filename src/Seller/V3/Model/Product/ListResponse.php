@@ -11,9 +11,9 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiResponseInterface;
 readonly class ListResponse extends AbstractModel implements ApiResponseInterface
 {
     /**
-     * @param ListResult[] $result
+     * @param ListResult $result
      */
     public function __construct(
-        public array $result,
+        public ListResult $result,
     ) {}
 }

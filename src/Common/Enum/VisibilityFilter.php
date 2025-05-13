@@ -1,8 +1,8 @@
 <?php
 
-namespace AlexeyShirchkov\Ozon\Seller\V3\Enum;
+namespace AlexeyShirchkov\Ozon\Common\Enum;
 
-enum ListFilterVisibility: string
+enum VisibilityFilter: string
 {
     case All = 'ALL';
     case Visible = 'VISIBLE';

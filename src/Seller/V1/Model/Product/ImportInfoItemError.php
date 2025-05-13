@@ -6,7 +6,7 @@ namespace AlexeyShirchkov\Ozon\Seller\V1\Model\Product;
 
 use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 
-readonly class ImportError extends AbstractModel
+readonly class ImportInfoItemError extends AbstractModel
 {
     /**
      * @param string $code

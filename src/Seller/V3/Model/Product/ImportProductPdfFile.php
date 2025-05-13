@@ -7,7 +7,7 @@ namespace AlexeyShirchkov\Ozon\Seller\V3\Model\Product;
 
 use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 
-readonly class PdfFile extends AbstractModel
+readonly class ImportProductPdfFile extends AbstractModel
 {
     /**
      * @param int|null $index

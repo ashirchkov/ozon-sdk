@@ -8,12 +8,16 @@ use AlexeyShirchkov\Ozon\Common\Enum\HttpMethod;
 use AlexeyShirchkov\Ozon\Seller\AbstractService;
 use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportInfoRequest;
-use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportInfoResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkuRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportInfoResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\RatingBySkuRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkuResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\RatingBySkuResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\PicturesImportRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\PicturesImportResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\AttributesUpdateRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\AttributesUpdateResponse;
 
 class ProductService extends AbstractService
@@ -72,6 +76,34 @@ class ProductService extends AbstractService
 
         return $this->sendRequest(HttpMethod::Post, '/v1/product/pictures/import', $request)
             ->toModel(PicturesImportResponse::class);
+
+    }
+
+    /**
+     * Получить контент-рейтинг товаров по SKU
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_GetProductRatingBySku
+     * @param RatingBySkuRequest $request
+     * @return RatingBySkuResponse
+     * @throws OzonApiException
+     */
+    public function ratingBySku(RatingBySkuRequest $request): RatingBySkuResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v1/product/rating-by-sku', $request)
+            ->toModel(RatingBySkuResponse::class);
+
+    }
+
+    /**
+     * Получить описание товара
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_GetProductInfoDescription
+     * @param InfoDescriptionRequest $request
+     * @return InfoDescriptionResponse
+     * @throws OzonApiException
+     */
+    public function infoDescription(InfoDescriptionRequest $request): InfoDescriptionResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v1/product/info/description', $request)
+            ->toModel(InfoDescriptionResponse::class);
 
     }
 

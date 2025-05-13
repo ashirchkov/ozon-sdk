@@ -1,0 +1,22 @@
+{
+  "result": {
+    "items": [
+      {
+        "archived": true,
+        "has_fbo_stocks": true,
+        "has_fbs_stocks": true,
+        "is_discounted": true,
+        "offer_id": "321",
+        "product_id": 123,
+        "quants": [
+          {
+            "quant_code": "string",
+            "quant_size": 0
+          }
+        ]
+      }
+    ],
+    "total": 1,
+    "last_id": "bnVсbA=="
+  }
+}

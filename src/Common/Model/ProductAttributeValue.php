@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AlexeyShirchkov\Ozon\Seller\V3\Model\Product;
+namespace AlexeyShirchkov\Ozon\Common\Model;
 
-use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
-
-readonly class AttributeValue extends AbstractModel
+readonly class ProductAttributeValue extends AbstractModel
 {
     /**
      * @param int|null $dictionary_value_id Идентификатор характеристики в словаре

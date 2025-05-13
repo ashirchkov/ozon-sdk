@@ -17,7 +17,7 @@ readonly class ApiError extends AbstractModel implements ApiResponseInterface
     public function __construct(
         public int $code,
         public string $message,
-        public array $details,
+        public array $details = [],
     ) {}
 
 }

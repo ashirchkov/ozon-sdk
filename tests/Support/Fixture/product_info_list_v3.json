@@ -1,0 +1,131 @@
+{
+  "items": [
+    {
+      "barcodes": [
+        "string"
+      ],
+      "color_image": [
+        "string"
+      ],
+      "commissions": [
+        {
+          "delivery_amount": 0,
+          "percent": 0,
+          "return_amount": 0,
+          "sale_schema": "string",
+          "value": 0
+        }
+      ],
+      "created_at": "2019-08-24T14:15:22Z",
+      "currency_code": "RUB",
+      "description_category_id": 0,
+      "discounted_fbo_stocks": 0,
+      "errors": [
+        {
+          "attribute_id": 0,
+          "code": "string",
+          "field": "string",
+          "level": "ERROR_LEVEL_UNSPECIFIED",
+          "state": "string",
+          "texts": {
+            "attribute_name": "string",
+            "description": "string",
+            "hint_code": "string",
+            "message": "string",
+            "params": [
+              {
+                "name": "string",
+                "value": "string"
+              }
+            ],
+            "short_description": "string"
+          }
+        }
+      ],
+      "has_discounted_fbo_item": true,
+      "id": 123,
+      "images": [
+        "string"
+      ],
+      "images360": [
+        "string"
+      ],
+      "is_archived": true,
+      "is_autoarchived": true,
+      "is_discounted": true,
+      "is_kgt": true,
+      "is_prepayment_allowed": true,
+      "is_super": true,
+      "marketing_price": "string",
+      "min_price": "string",
+      "model_info": {
+        "count": 0,
+        "model_id": 0
+      },
+      "name": "string",
+      "offer_id": "string",
+      "old_price": "string",
+      "price": "string",
+      "price_indexes": {
+        "color_index": "COLOR_INDEX_UNSPECIFIED",
+        "external_index_data": {
+          "minimal_price": "string",
+          "minimal_price_currency": "RUB",
+          "price_index_value": 0
+        },
+        "ozon_index_data": {
+          "minimal_price": "string",
+          "minimal_price_currency": "RUB",
+          "price_index_value": 0
+        },
+        "self_marketplaces_index_data": {
+          "minimal_price": "string",
+          "minimal_price_currency": "RUB",
+          "price_index_value": 0
+        }
+      },
+      "primary_image": [
+        "string"
+      ],
+      "sources": [
+        {
+          "created_at": "2019-08-24T14:15:22Z",
+          "quant_code": "string",
+          "shipment_type": "SHIPMENT_TYPE_UNSPECIFIED",
+          "sku": 0,
+          "source": "FBO"
+        }
+      ],
+      "statuses": {
+        "is_created": true,
+        "moderate_status": "string",
+        "status": "string",
+        "status_description": "string",
+        "status_failed": "string",
+        "status_name": "string",
+        "status_tooltip": "string",
+        "status_updated_at": "2019-08-24T14:15:22Z",
+        "validation_status": "string"
+      },
+      "stocks": {
+        "has_stock": true,
+        "stocks": [
+          {
+            "present": 0,
+            "reserved": 0,
+            "sku": 0,
+            "source": "FBO"
+          }
+        ]
+      },
+      "type_id": 0,
+      "updated_at": "2019-08-24T14:15:22Z",
+      "vat": "string",
+      "visibility_details": {
+        "has_price": true,
+        "has_stock": true
+      },
+      "volume_weight": 0
+    }
+  ]
+}

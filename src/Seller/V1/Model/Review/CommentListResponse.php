@@ -11,12 +11,12 @@ readonly class CommentListResponse extends AbstractModel implements ApiResponseI
 {
 
     /**
-     * @param Comment[] $comments
      * @param int $offset
+     * @param Comment[] $comments
      */
     public function __construct(
-        public array $comments,
-        public int $offset
+        public int $offset,
+        public array $comments = []
     ) {}
 
 }

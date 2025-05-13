@@ -9,6 +9,14 @@ use AlexeyShirchkov\Ozon\Seller\V1\Enum\PictureImportState;
 
 readonly class Picture extends AbstractModel
 {
+    /**
+     * @param int $product_id
+     * @param PictureImportState $state
+     * @param string $url
+     * @param bool $is_primary
+     * @param bool $is_360
+     * @param bool $is_color
+     */
     public function __construct(
         public int $product_id,
         public PictureImportState $state,

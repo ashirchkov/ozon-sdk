@@ -10,11 +10,11 @@ use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 readonly class ListItemQuant extends AbstractModel
 {
     /**
-     * @param string $quant_code
-     * @param int $quant_size
+     * @param string|null $quant_code
+     * @param int|null $quant_size
      */
     public function __construct(
-        public string $quant_code,
-        public int $quant_size,
+        public ?string $quant_code = null,
+        public ?int $quant_size = null,
     ) {}
 }

@@ -1,0 +1,14 @@
+{
+  "result": {
+    "pictures": [
+      {
+        "is_360": true,
+        "is_color": true,
+        "is_primary": true,
+        "product_id": 123,
+        "state": "imported",
+        "url": "string"
+      }
+    ]
+  }
+}

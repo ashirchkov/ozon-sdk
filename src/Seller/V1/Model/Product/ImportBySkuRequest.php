@@ -10,9 +10,9 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiRequestInterface;
 readonly class ImportBySkuRequest extends AbstractModel implements ApiRequestInterface
 {
     /**
-     * @param ImportBySkyItem[] $items
+     * @param ImportBySkyItem[]|null $items
      */
     public function __construct(
-        public array $items
+        public ?array $items = null
     ) {}
 }

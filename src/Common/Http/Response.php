@@ -63,14 +63,14 @@ class Response
     /**
      * @return int
      */
-    public function getStatus(): int {
+    public function getStatus():int {
         return $this->status;
     }
 
     /**
      * @return string[][]
      */
-    public function getHeaders(): array {
+    public function getHeaders():array {
         return $this->headers;
     }
 
@@ -78,7 +78,7 @@ class Response
      * @param $name
      * @return string|null
      */
-    public function getHeader($name): ?string {
+    public function getHeader($name):?string {
 
         $result = null;
 
@@ -93,21 +93,21 @@ class Response
     /**
      * @return string
      */
-    public function getBody(): string {
+    public function getBody():string {
         return $this->body;
     }
 
     /**
      * @return bool
      */
-    public function isSuccess(): bool {
+    public function isSuccess():bool {
         return $this->getStatus() >= 200 && $this->getStatus() <= 299;
     }
 
     /**
      * @return array
      */
-    public function toArray(): array {
+    public function toArray():array {
 
         $result = json_decode($this->getBody(), true);
 
