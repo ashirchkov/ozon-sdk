@@ -10,7 +10,7 @@ use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 readonly class PicturesImportResult extends AbstractModel
 {
     /**
-     * @param Picture[]|null $pictures
+     * @param PicturesImportPicture[]|null $pictures
      */
     public function __construct(
         public ?array $pictures = null

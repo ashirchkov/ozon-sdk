@@ -7,7 +7,7 @@ namespace AlexeyShirchkov\Ozon\Seller\V1\Model\Product;
 use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 use AlexeyShirchkov\Ozon\Seller\V1\Enum\PictureImportState;
 
-readonly class Picture extends AbstractModel
+readonly class PicturesImportPicture extends AbstractModel
 {
     /**
      * @param int $product_id
