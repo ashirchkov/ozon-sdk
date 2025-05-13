@@ -7,16 +7,24 @@ namespace AlexeyShirchkov\Ozon\Tests\Unit\Seller\V1\Service;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
+use AlexeyShirchkov\Ozon\Seller\V1\Enum\TaskStatus;
 use AlexeyShirchkov\Ozon\Seller\V1\Service\ProductService;
 use AlexeyShirchkov\Ozon\Tests\Unit\Seller\ServiceTestCase;
 use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ArchiveRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkyItem;
 use AlexeyShirchkov\Ozon\Tests\Support\Factory\MockResponseFactory;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportInfoRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateOfferIdItem;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkuRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\RatingBySkuRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateOfferIdRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\GetRelatedSkuRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\PicturesImportRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\AttributesUpdateRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoSubscriptionRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesInfoRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionByOfferIdRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionByProductIdRequest;
 
@@ -203,6 +211,215 @@ class ProductServiceTest extends ServiceTestCase
         $service->infoDescription(
             new InfoDescriptionByOfferIdRequest('123')
         );
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testUpdateOfferIdMethod(): void {
+
+        $request = new UpdateOfferIdRequest([
+            new UpdateOfferIdItem('321', '123')
+        ]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_update_offer_id_v1')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->updateOfferId($request);
+
+        $this->assertCount(1, $response->errors);
+        $this->assertEquals('123', $response->errors[0]->offer_id);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->updateOfferId($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testArchiveMethod(): void {
+
+        $request = new ArchiveRequest([123]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                json_encode(['result' => true])
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->archive($request);
+        $this->assertTrue($response->result);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->archive($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testUnarchiveMethod(): void {
+
+        $request = new ArchiveRequest([123]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                json_encode(['result' => true])
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->unarchive($request);
+        $this->assertTrue($response->result);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->unarchive($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testUploadDigitalCodesMethod(): void {
+
+        $request = new UploadDigitalCodesRequest(123, ['123', '456']);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                json_encode(['result' => ['task_id' => 123456]])
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->uploadDigitalCodes($request);
+        $this->assertEquals(123456, $response->result->task_id);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->uploadDigitalCodes($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testUploadDigitalCodesInfoMethod(): void {
+
+        $request = new UploadDigitalCodesInfoRequest(123456);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                json_encode(['result' => ['status' => 'imported']])
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->uploadDigitalCodesInfo($request);
+        $this->assertEquals(TaskStatus::Imported, $response->result->status);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->uploadDigitalCodesInfo($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testInfoSubscriptionMethod(): void {
+
+        $request = new InfoSubscriptionRequest([123]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_info_subscription_v1')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->infoSubscription($request);
+        $this->assertCount(1, $response->result);
+        $this->assertEquals(123, $response->result[0]->sku);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->infoSubscription($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testGetRelatedSkuMethod(): void {
+
+        $request = new GetRelatedSkuRequest([123]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_get_related_sku_v1')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->getRelatedSku($request);
+        $this->assertCount(1, $response->items);
+        $this->assertEquals(123, $response->items[0]->sku);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->getRelatedSku($request);
 
     }
 

@@ -28,7 +28,7 @@ class ProductServiceTest extends ServiceTestCase
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('product_import_v3')
+                json_encode(['result' => ['task_id' => 123456]])
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')

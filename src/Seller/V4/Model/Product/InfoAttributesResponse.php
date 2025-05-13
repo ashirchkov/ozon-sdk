@@ -10,13 +10,13 @@ use AlexeyShirchkov\Ozon\Common\Contract\ApiResponseInterface;
 readonly class InfoAttributesResponse extends AbstractModel implements ApiResponseInterface
 {
     /**
-     * @param InfoAttributesProduct[] $result
      * @param string $last_id
      * @param int $total
+     * @param InfoAttributesProduct[] $result
      */
     public function __construct(
-        public array $result = [],
         public string $last_id,
         public int $total,
+        public array $result = [],
     ) {}
 }

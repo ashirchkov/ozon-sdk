@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "product_id": 123,
+      "primary_photo": [
+        "string"
+      ],
+      "photo": [
+        "string"
+      ],
+      "color_photo": [
+        "string"
+      ],
+      "photo_360": [
+        "string"
+      ]
+    }
+  ]
+}

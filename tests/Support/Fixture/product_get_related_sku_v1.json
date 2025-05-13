@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "availability": "AVAILABLE",
+      "deleted_at": "2019-08-24T14:15:22Z",
+      "delivery_schema": "FBS",
+      "product_id": 0,
+      "sku": 123
+    }
+  ],
+  "errors": [
+    {
+      "code": "string",
+      "sku": 0,
+      "message": "string"
+    }
+  ]
+}
