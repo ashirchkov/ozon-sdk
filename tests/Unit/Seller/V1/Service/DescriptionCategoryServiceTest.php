@@ -16,7 +16,7 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\DescriptionCategory\AttributeRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\DescriptionCategory\AttributeValuesRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\DescriptionCategory\AttributeValuesSearchRequest;
 
-class DescriptionCategoryTest extends ServiceTestCase
+class DescriptionCategoryServiceTest extends ServiceTestCase
 {
 
     /**

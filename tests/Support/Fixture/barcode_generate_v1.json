@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "string",
+      "error": "string",
+      "barcode": "string",
+      "product_id": 123
+    }
+  ]
+}

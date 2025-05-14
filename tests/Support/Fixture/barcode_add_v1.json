@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "string",
+      "error": "string",
+      "barcode": "string",
+      "sku": 123
+    }
+  ]
+}
