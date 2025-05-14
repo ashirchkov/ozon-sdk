@@ -8,7 +8,9 @@ use AlexeyShirchkov\Ozon\Seller\AbstractService;
 use AlexeyShirchkov\Ozon\Common\Enum\HttpMethod;
 use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\DeleteRequest;
+use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\StocksRequest;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\DeleteResponse;
+use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\StocksResponse;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\PicturesInfoRequest;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\PicturesInfoResponse;
 
@@ -40,6 +42,20 @@ class ProductService extends AbstractService
 
         return $this->sendRequest(HttpMethod::Post, '/v2/product/pictures/info', $request)
             ->toModel(PicturesInfoResponse::class);
+
+    }
+
+    /**
+     * Обновить количество товаров на складах
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_ProductsStocksV2
+     * @param StocksRequest $request
+     * @return StocksResponse
+     * @throws OzonApiException
+     */
+    public function stocks(StocksRequest $request): StocksResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v2/products/stocks', $request)
+            ->toModel(StocksResponse::class);
 
     }
 

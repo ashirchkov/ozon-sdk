@@ -1,0 +1,19 @@
+{
+  "cursor": "string",
+  "items": [
+    {
+      "offer_id": "string",
+      "product_id": 123,
+      "stocks": [
+        {
+          "present": 0,
+          "reserved": 0,
+          "shipment_type": "SHIPMENT_TYPE_GENERAL",
+          "sku": 0,
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "total": 0
+}

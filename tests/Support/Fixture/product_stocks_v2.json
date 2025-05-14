@@ -1,0 +1,12 @@
+{
+  "result": [
+    {
+      "warehouse_id": 123456,
+      "product_id": 123,
+      "quant_size": 1,
+      "offer_id": "string",
+      "updated": true,
+      "errors": []
+    }
+  ]
+}

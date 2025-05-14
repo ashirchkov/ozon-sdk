@@ -1,0 +1,12 @@
+{
+  "result": [
+    {
+      "sku": 123,
+      "present": 0,
+      "product_id": 0,
+      "reserved": 0,
+      "warehouse_id": 0,
+      "warehouse_name": "string"
+    }
+  ]
+}

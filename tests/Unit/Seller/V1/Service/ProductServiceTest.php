@@ -13,19 +13,24 @@ use AlexeyShirchkov\Ozon\Tests\Unit\Seller\ServiceTestCase;
 use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ArchiveRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkyItem;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportPricesItem;
 use AlexeyShirchkov\Ozon\Tests\Support\Factory\MockResponseFactory;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportInfoRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateOfferIdItem;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkuRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\RatingBySkuRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportPricesRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateOfferIdRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\GetRelatedSkuRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\PicturesImportRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDiscountedRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateDiscountRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\AttributesUpdateRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoSubscriptionRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesInfoRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionByOfferIdRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoStocksByWarehouseFbsRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionByProductIdRequest;
 
 class ProductServiceTest extends ServiceTestCase
@@ -420,6 +425,125 @@ class ProductServiceTest extends ServiceTestCase
         $this->expectException(OzonApiException::class);
         $this->expectExceptionMessage('string');
         $service->getRelatedSku($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testInfoStocksByWarehouseFbsMethod(): void {
+
+        $request = new InfoStocksByWarehouseFbsRequest([123]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_info_stocks_by_warehouse_fbs_v1')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->infoStocksByWarehouseFbs($request);
+        $this->assertCount(1, $response->result);
+        $this->assertEquals(123, $response->result[0]->sku);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->infoStocksByWarehouseFbs($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testImportPricesMethod(): void {
+
+        $request = new ImportPricesRequest([new ImportPricesItem('123')]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_import_prices_v1')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->importPrices($request);
+        $this->assertCount(1, $response->result);
+        $this->assertEquals(123, $response->result[0]->product_id);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->importPrices($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testInfoDiscountedMethod(): void {
+
+        $request = new InfoDiscountedRequest([123]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_info_discounted_v1')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->infoDiscounted($request);
+        $this->assertCount(1, $response->items);
+        $this->assertEquals(123, $response->items[0]->sku);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->infoDiscounted($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testUpdateDiscountMethod(): void {
+
+        $request = new UpdateDiscountRequest(123, 100);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                json_encode(['result' => true])
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->updateDiscount($request);
+        $this->assertTrue($response->result);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->updateDiscount($request);
 
     }
 

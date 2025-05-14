@@ -11,8 +11,10 @@ use GuzzleHttp\Handler\MockHandler;
 use AlexeyShirchkov\Ozon\Seller\V2\Service\ProductService;
 use AlexeyShirchkov\Ozon\Tests\Unit\Seller\ServiceTestCase;
 use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
+use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\StocksItem;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\DeleteRequest;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\DeleteProduct;
+use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\StocksRequest;
 use AlexeyShirchkov\Ozon\Tests\Support\Factory\MockResponseFactory;
 use AlexeyShirchkov\Ozon\Seller\V2\Model\Product\PicturesInfoRequest;
 
@@ -74,6 +76,36 @@ class ProductServiceTest extends ServiceTestCase
         $this->expectException(OzonApiException::class);
         $this->expectExceptionMessage('string');
         $service->picturesInfo($request);
+
+    }
+
+    /**
+     * @return void
+     * @throws OzonApiException
+     */
+    public function testStocksMethod(): void {
+
+        $request = new StocksRequest([new StocksItem(123, 1, 2, 3)]);
+
+        $mockHandler = new MockHandler([
+            MockResponseFactory::createSuccessResponse(
+                $this->fixtureLoader->load('product_stocks_v2')
+            ),
+            MockResponseFactory::createErrorResponse(
+                $this->fixtureLoader->load('api_error')
+            )
+        ]);
+
+        $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
+        $service = new ProductService($mockClient, $this->configuration, $this->serializer);
+
+        $response = $service->stocks($request);
+        $this->assertCount(1, $response->result);
+        $this->assertEquals(123, $response->result[0]->product_id);
+
+        $this->expectException(OzonApiException::class);
+        $this->expectExceptionMessage('string');
+        $service->stocks($request);
 
     }
 

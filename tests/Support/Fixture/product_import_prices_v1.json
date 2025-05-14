@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "product_id": 123,
+      "offer_id": "string",
+      "updated": true,
+      "errors": []
+    }
+  ]
+}

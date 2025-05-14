@@ -15,13 +15,19 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportInfoResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\RatingBySkuRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportBySkuResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\RatingBySkuResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportPricesRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateOfferIdRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\GetRelatedSkuRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\ImportPricesResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\PicturesImportRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateOfferIdResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\GetRelatedSkuResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDiscountedRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateDiscountRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\PicturesImportResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDiscountedResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UpdateDiscountResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\AttributesUpdateRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoDescriptionResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoSubscriptionRequest;
@@ -31,6 +37,8 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesInfoRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\UploadDigitalCodesInfoResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoStocksByWarehouseFbsRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Product\InfoStocksByWarehouseFbsResponse;
 
 class ProductService extends AbstractService
 {
@@ -214,6 +222,63 @@ class ProductService extends AbstractService
 
         return $this->sendRequest(HttpMethod::Post, '/v1/product/related-sku/get', $request)
             ->toModel(GetRelatedSkuResponse::class);
+
+    }
+
+    /**
+     * Информация об остатках на складах продавца (FBS и rFBS)
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_ProductStocksByWarehouseFbs
+     * @param InfoStocksByWarehouseFbsRequest $request
+     * @return InfoStocksByWarehouseFbsResponse
+     * @throws OzonApiException
+     */
+    public function infoStocksByWarehouseFbs(InfoStocksByWarehouseFbsRequest $request): InfoStocksByWarehouseFbsResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v1/product/info/stocks-by-warehouse/fbs', $request)
+            ->toModel(InfoStocksByWarehouseFbsResponse::class);
+
+    }
+
+    /**
+     * Обновить цену
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_ImportProductsPrices
+     * @param ImportPricesRequest $request
+     * @return ImportPricesResponse
+     * @throws OzonApiException
+     * @link
+     */
+    public function importPrices(ImportPricesRequest $request): ImportPricesResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v1/product/import/prices', $request)
+            ->toModel(ImportPricesResponse::class);
+
+    }
+
+    /**
+     * Узнать информацию об уценке и основном товаре по SKU уценённого товара
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_GetProductInfoDiscounted
+     * @param InfoDiscountedRequest $request
+     * @return InfoDiscountedResponse
+     * @throws OzonApiException
+     */
+    public function infoDiscounted(InfoDiscountedRequest $request): InfoDiscountedResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v1/product/info/discounted', $request)
+            ->toModel(InfoDiscountedResponse::class);
+
+    }
+
+    /**
+     * Установить скидку на уценённый товар
+     * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/ProductAPI_ProductUpdateDiscount
+     * @param UpdateDiscountRequest $request
+     * @return UpdateDiscountResponse
+     * @throws OzonApiException
+     */
+    public function updateDiscount(UpdateDiscountRequest $request): UpdateDiscountResponse {
+
+        return $this->sendRequest(HttpMethod::Post, '/v1/product/update/discount', $request)
+            ->toModel(UpdateDiscountResponse::class);
 
     }
 

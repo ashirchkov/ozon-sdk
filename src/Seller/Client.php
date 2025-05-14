@@ -10,6 +10,7 @@ use AlexeyShirchkov\Ozon\Seller\V1\ClientV1;
 use AlexeyShirchkov\Ozon\Seller\V2\ClientV2;
 use AlexeyShirchkov\Ozon\Seller\V3\ClientV3;
 use AlexeyShirchkov\Ozon\Seller\V4\ClientV4;
+use AlexeyShirchkov\Ozon\Seller\V5\ClientV5;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class Client
@@ -63,6 +64,15 @@ final class Client
      */
     public function v4(): ClientV4 {
         return $this->instances[ClientV4::class] ??= new ClientV4(
+            $this->httpClient, $this->configuration, $this->serializer
+        );
+    }
+
+    /**
+     * @return ClientV5
+     */
+    public function v5(): ClientV5 {
+        return $this->instances[ClientV5::class] ??= new ClientV5(
             $this->httpClient, $this->configuration, $this->serializer
         );
     }

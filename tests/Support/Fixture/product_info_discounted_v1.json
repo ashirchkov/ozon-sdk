@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "discounted_sku": 123,
+      "sku": 123,
+      "condition_estimation": "4",
+      "packaging_violation": "",
+      "warranty_type": "",
+      "reason_damaged": "Механическое повреждение",
+      "comment_reason_damaged": "повреждена заводская упаковка",
+      "defects": "",
+      "mechanical_damage": "",
+      "package_damage": "",
+      "shortage": "",
+      "repair": "",
+      "condition": ""
+    }
+  ]
+}
