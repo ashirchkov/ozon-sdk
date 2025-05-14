@@ -1,0 +1,24 @@
+{
+  "result": [
+    {
+      "description_category_id": 123,
+      "category_name": "Канцелярские товары",
+      "disabled": false,
+      "children": [
+        {
+          "description_category_id": 456,
+          "category_name": "Печати и штампы",
+          "disabled": false,
+          "children": [
+            {
+              "type_name": "Пистолет-маркиратор",
+              "type_id": 970778135,
+              "disabled": false,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

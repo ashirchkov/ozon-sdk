@@ -7,7 +7,7 @@ namespace AlexeyShirchkov\Ozon\Seller\V1;
 use Psr\Http\Client\ClientInterface;
 use AlexeyShirchkov\Ozon\Seller\ClientConfiguration;
 use Symfony\Component\Serializer\SerializerInterface;
-use AlexeyShirchkov\Ozon\Seller\V1\Service\ReviewsService;
+use AlexeyShirchkov\Ozon\Seller\V1\Service\ReviewService;
 use AlexeyShirchkov\Ozon\Seller\V1\Service\ProductService;
 
 final class ClientV1
@@ -39,10 +39,10 @@ final class ClientV1
     }
 
     /**
-     * @return ReviewsService
+     * @return ReviewService
      */
-    public function review(): ReviewsService {
-        return $this->instances[ReviewsService::class] ??= new ReviewsService(
+    public function review(): ReviewService {
+        return $this->instances[ReviewService::class] ??= new ReviewService(
             $this->httpClient, $this->configuration, $this->serializer
         );
     }

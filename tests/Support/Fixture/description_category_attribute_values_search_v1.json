@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "id": 123,
+      "info": "string",
+      "picture": "string",
+      "value": "string"
+    }
+  ]
+}

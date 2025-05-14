@@ -1,0 +1,20 @@
+{
+  "result": [
+    {
+      "id": 123,
+      "attribute_complex_id": 0,
+      "name": "Бренд в одежде и обуви",
+      "description": "Укажите наименование бренда, под которым произведён товар. Если товар не имеет бренда, используйте значение \"Нет бренда\"",
+      "type": "string",
+      "is_collection": false,
+      "is_required": true,
+      "is_aspect": false,
+      "max_value_count": 0,
+      "group_name": "",
+      "group_id": 0,
+      "dictionary_id": 28732849,
+      "category_dependent": true,
+      "complex_is_collection": true
+    }
+  ]
+}

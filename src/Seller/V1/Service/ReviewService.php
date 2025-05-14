@@ -19,7 +19,7 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentCreateRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentDeleteRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\CommentCreateResponse;
 
-class ReviewsService extends AbstractService
+class ReviewService extends AbstractService
 {
 
     /**

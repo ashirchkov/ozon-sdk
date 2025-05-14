@@ -1,0 +1,17 @@
+{
+  "result": [
+    {
+      "id": 123,
+      "value": "Sunshine",
+      "info": "",
+      "picture": "https://cdn1.ozone.ru/s3/multimedia-i/6010930878.jpg"
+    },
+    {
+      "id": 456,
+      "value": "Essence",
+      "info": "Красота и здоровье",
+      "picture": "https://cdn1.ozone.ru/s3/multimedia-v/6088253599.jpg"
+    }
+  ],
+  "has_next": true
+}

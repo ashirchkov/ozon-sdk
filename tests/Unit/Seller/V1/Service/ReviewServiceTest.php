@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
 use AlexeyShirchkov\Ozon\Seller\V1\Enum\ReviewStatus;
-use AlexeyShirchkov\Ozon\Seller\V1\Service\ReviewsService;
+use AlexeyShirchkov\Ozon\Seller\V1\Service\ReviewService;
 use AlexeyShirchkov\Ozon\Tests\Unit\Seller\ServiceTestCase;
 use AlexeyShirchkov\Ozon\Common\Exception\OzonApiException;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Review\InfoRequest;
@@ -39,7 +39,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
         $result = $service->commentCreate($request);
 
         $this->assertEquals('12345', $result->comment_id);
@@ -63,7 +63,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
 
         $result = $service->commentDelete($request);
         $this->assertTrue($result);
@@ -91,7 +91,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
         $result = $service->commentList($request);
 
         $this->assertEquals('string', $result->comments[0]->id);
@@ -117,7 +117,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
         $result = $service->changeStatus($request);
 
         $this->assertTrue($result);
@@ -143,7 +143,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
         $result = $service->count();
 
         $this->assertEquals(0, $result->total);
@@ -171,7 +171,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
         $result = $service->info($request);
 
         $this->assertEquals('string', $result->id);
@@ -199,7 +199,7 @@ class ReviewServiceTest extends ServiceTestCase
         ]);
 
         $mockClient = new Client(['handler' => HandlerStack::create($mockHandler)]);
-        $service = new ReviewsService($mockClient, $this->configuration, $this->serializer);
+        $service = new ReviewService($mockClient, $this->configuration, $this->serializer);
         $result = $service->list($request);
 
         $this->assertEquals('string', $result->reviews[0]->id);
