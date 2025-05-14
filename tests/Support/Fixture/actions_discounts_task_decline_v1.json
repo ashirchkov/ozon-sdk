@@ -1,0 +1,12 @@
+{
+  "result": {
+    "fail_details": [
+      {
+        "task_id": 123,
+        "error_for_user": "string"
+      }
+    ],
+    "success_count": 4,
+    "fail_count": 5
+  }
+}

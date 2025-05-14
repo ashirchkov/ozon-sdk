@@ -8,6 +8,7 @@ use Psr\Http\Client\ClientInterface;
 use AlexeyShirchkov\Ozon\Seller\ClientConfiguration;
 use Symfony\Component\Serializer\SerializerInterface;
 use AlexeyShirchkov\Ozon\Seller\V1\Service\ReviewService;
+use AlexeyShirchkov\Ozon\Seller\V1\Service\ActionService;
 use AlexeyShirchkov\Ozon\Seller\V1\Service\ProductService;
 
 final class ClientV1
@@ -34,6 +35,15 @@ final class ClientV1
      */
     public function product(): ProductService {
         return $this->instances[ProductService::class] ??= new ProductService(
+            $this->httpClient, $this->configuration, $this->serializer
+        );
+    }
+
+    /**
+     * @return ActionService
+     */
+    public function action(): ActionService {
+        return $this->instances[ActionService::class] ??= new ActionService(
             $this->httpClient, $this->configuration, $this->serializer
         );
     }

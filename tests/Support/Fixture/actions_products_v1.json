@@ -1,0 +1,17 @@
+{
+  "result": {
+    "products": [
+      {
+        "id": 123,
+        "price": 5503,
+        "action_price": 621,
+        "max_action_price": 3712.1,
+        "add_mode": "MANUAL",
+        "stock": 0,
+        "min_stock": 0
+      }
+    ],
+    "total": 1,
+    "last_id": "bnVсbA=="
+  }
+}
