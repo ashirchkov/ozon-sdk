@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AlexeyShirchkov\Ozon\Seller\V1\Model\Review;
 
+use DateTimeImmutable;
 use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 
 readonly class Review extends AbstractModel
@@ -11,7 +12,7 @@ readonly class Review extends AbstractModel
 
     /**
      * @param string $id
-     * @param string $published_at
+     * @param DateTimeImmutable $published_at
      * @param int $rating
      * @param int $sku
      * @param string $status
@@ -28,7 +29,7 @@ readonly class Review extends AbstractModel
      */
     public function __construct(
         public string $id,
-        public string $published_at,
+        public DateTimeImmutable $published_at,
         public int $rating,
         public int $sku,
         public string $status,
