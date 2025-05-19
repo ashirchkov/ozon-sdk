@@ -13,7 +13,7 @@ readonly class ListResponse extends AbstractModel implements ApiResponseInterfac
     /**
      * @param bool $has_next
      * @param string $last_id
-     * @param Review[] $reviews
+     * @param ListItem[] $reviews
      */
     public function __construct(
         public bool $has_next,

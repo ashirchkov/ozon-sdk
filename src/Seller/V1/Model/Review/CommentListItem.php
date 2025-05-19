@@ -7,7 +7,7 @@ namespace AlexeyShirchkov\Ozon\Seller\V1\Model\Review;
 use DateTimeImmutable;
 use AlexeyShirchkov\Ozon\Common\Model\AbstractModel;
 
-readonly class Comment extends AbstractModel
+readonly class CommentListItem extends AbstractModel
 {
 
     /**
