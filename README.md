@@ -6,7 +6,7 @@ Ozon SDK
 
 Ozon Seller - <https://docs.ozon.ru/api/seller>
 
-## Install
+## Установка
 
 Via Composer
 
@@ -14,7 +14,16 @@ Via Composer
 $ composer require ashirchkov/ozon-sdk
 ```
 
-## Documentation
+## Подробная документация
 
-Coming soon...
-
+- [Seller API](docs/seller.md)
+- Retail API (Coming soon...)
+- Agent API (Coming soon...)
+- Performance API (Coming soon...)
+- Logistic platform API (Coming soon...)
+- TK API (Coming soon...)
+- Statistics API (Coming soon...)
+- Applications API (Coming soon...)
+- Export API Logistic Platform (Coming soon...)
+- FBP API (Coming soon...)
+- ORD API (Coming soon...)
