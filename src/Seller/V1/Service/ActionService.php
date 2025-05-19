@@ -17,6 +17,8 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\ProductsActivateRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\ProductsActivateResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskListRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskListResponse;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\ProductsDeactivateRequest;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\ProductsDeactivateResponse;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskApproveRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskDeclineRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskApproveResponse;
@@ -83,14 +85,14 @@ class ActionService extends AbstractService
     /**
      * Удалить товары из акции
      * @link https://docs.ozon.ru/api/seller/?__rr=1#operation/PromosProductsDeactivate
-     * @param ProductsActivateRequest $request
-     * @return ProductsActivateResponse
+     * @param ProductsDeactivateRequest $request
+     * @return ProductsDeactivateResponse
      * @throws OzonApiException
      */
-    public function productsDeactivate(ProductsActivateRequest $request): ProductsActivateResponse {
+    public function productsDeactivate(ProductsDeactivateRequest $request): ProductsDeactivateResponse {
 
         return $this->sendRequest(HttpMethod::Post, '/v1/actions/products/deactivate', $request)
-            ->toModel(ProductsActivateResponse::class);
+            ->toModel(ProductsDeactivateResponse::class);
 
     }
 

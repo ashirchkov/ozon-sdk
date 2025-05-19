@@ -26,8 +26,8 @@ readonly class InfoResponse extends AbstractModel implements ApiResponseInterfac
      * @param int $videos_amount
      * @param int $likes_amount
      * @param int $dislikes_amount
-     * @param array|null $photos
-     * @param array|null $videos
+     * @param InfoPhoto[]|null $photos
+     * @param InfoVideo[]|null $videos
      */
     public function __construct(
         public string $id,

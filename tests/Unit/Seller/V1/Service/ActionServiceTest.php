@@ -19,6 +19,7 @@ use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\ProductsActivateProduct;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskListRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskApproveTask;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskDeclineTask;
+use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\ProductsDeactivateRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskApproveRequest;
 use AlexeyShirchkov\Ozon\Seller\V1\Model\Action\DiscountsTaskDeclineRequest;
 
@@ -149,11 +150,11 @@ class ActionServiceTest extends ServiceTestCase
      */
     public function testProductsDeactivateMethod(): void {
 
-        $request = new ProductsActivateRequest(1, [new ProductsActivateProduct(123, 100)]);
+        $request = new ProductsDeactivateRequest(1, [123]);
 
         $mockHandler = new MockHandler([
             MockResponseFactory::createSuccessResponse(
-                $this->fixtureLoader->load('actions_products_activate_v1')
+                $this->fixtureLoader->load('actions_products_deactivate_v1')
             ),
             MockResponseFactory::createErrorResponse(
                 $this->fixtureLoader->load('api_error')
