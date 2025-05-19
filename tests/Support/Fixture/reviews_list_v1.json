@@ -6,12 +6,12 @@
       "comments_amount": 0,
       "id": "string",
       "is_rating_participant": true,
-      "order_status": "string",
+      "order_status": "DELIVERED",
       "photos_amount": 0,
       "published_at": "2019-08-24T14:15:22Z",
       "rating": 0,
       "sku": 0,
-      "status": "string",
+      "status": "PROCESSED",
       "text": "string",
       "videos_amount": 0
     }
